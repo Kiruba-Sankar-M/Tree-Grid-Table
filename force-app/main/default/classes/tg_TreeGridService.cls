@@ -310,4 +310,19 @@
             throw new AuraHandledException('Upsert failed: ' + e.getMessage() + ' at line number ' + e.getLineNumber());
         } 
     }
+
+    @AuraEnabled
+    public static void deleteRecords(List<Map<String, Object>> sObjectRecords, String objectApiName){
+        try {
+            List<sObject> sObjectRecordsList = new List<sObject>();
+            for(Map<String, Object> sObjectRecord : sObjectRecords) {
+                Id recordId = (Id)sObjectRecord.get('Id');
+                sObject sObj = Schema.getGlobalDescribe().get(objectApiName).newSObject(recordId);
+                sObjectRecordsList.add(sObj);
+            }
+            delete sObjectRecordsList;
+        } catch (Exception e) {
+            throw new AuraHandledException('Error when deleting record ' + e.getMessage() + ' at line ' + e.getLineNumber());
+        }
+    }
 }

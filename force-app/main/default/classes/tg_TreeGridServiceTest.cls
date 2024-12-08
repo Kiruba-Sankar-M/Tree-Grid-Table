@@ -96,6 +96,33 @@ public class tg_TreeGridServiceTest {
         insert contacts;
     }
 
+     @isTest
+    static void testDeleteRecords() {
+        // Step 1: Create test data
+        List<Account> accounts = new List<Account>();
+        for (Integer i = 0; i < 3; i++) {
+            accounts.add(new Account(Name = 'Test Account ' + i));
+        }
+        insert accounts;
+
+        // Step 2: Prepare data for the method
+        List<Map<String, Object>> sObjectRecords = new List<Map<String, Object>>();
+        for (Account acc : accounts) {
+            Map<String, Object> recordMap = new Map<String, Object>();
+            recordMap.put('Id', acc.Id);
+            sObjectRecords.add(recordMap);
+        }
+
+        // Step 3: Call the deleteRecords method
+        Test.startTest();
+        tg_TreeGridService.deleteRecords(sObjectRecords, 'Account');
+        Test.stopTest();
+
+        // Step 4: Verify the records are deleted
+        List<Account> deletedAccounts = [SELECT Id FROM Account WHERE Id IN :accounts];
+        System.assertEquals(0, deletedAccounts.size(), 'All accounts should be deleted.');
+    }
+
     @isTest
     static void testGetBluePrintOfTable() {
         Test.startTest();

@@ -1,7 +1,7 @@
 import { LightningElement, api } from 'lwc';
 import tg_Modal from 'c/tg_Modal';
 import LightningConfirm from "lightning/confirm";
-import deleteRecords from '@salesforce/apex/poc_Form_Controller.deleteRecords';
+import deleteRecords from '@salesforce/apex/tg_TreeGridService.deleteRecords';
 export default class Tg_TreeGridTable extends LightningElement {
 
     @api tableData = {};
