@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Is_Lightning_Input_Tag__c</fullName>
+    <formula>CASE(Data_Type__c, 
+    &apos;text&apos;, &apos;TRUE&apos;,
+    &apos;email&apos;, &apos;TRUE&apos;,
+    &apos;tel&apos;, &apos;TRUE&apos;,
+    &apos;checkbox-button&apos;, &apos;TRUE&apos;,
+    &apos;number&apos;, &apos;TRUE&apos;,
+    &apos;date&apos;, &apos;TRUE&apos;,
+    &apos;datetime&apos;, &apos;TRUE&apos;,
+    &apos;checkbox&apos;, &apos;TRUE&apos;,
+    &apos;password&apos;, &apos;TRUE&apos;,
+    &apos;url&apos;, &apos;TRUE&apos;,
+    &apos;toggle&apos;, &apos;TRUE&apos;,
+    &apos;FALSE&apos;
+) = &apos;TRUE&apos;</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Is Lightning Input Tag</label>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

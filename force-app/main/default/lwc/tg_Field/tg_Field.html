@@ -1,0 +1,93 @@
+<template>
+    <template lwc:if={field.isActive}>
+
+        <div class="label-helptext-container">
+            <abbr class="slds-required" title="required" lwc:if={field.isRequired}>*</abbr>
+            <label class="label">
+                {field.fieldLabel}
+            </label>
+        </div>
+
+        <template lwc:if={field.isLightningInputTag}>
+            <lightning-input label={field.label} value={field.value} name={field.fieldApiName} checked={field.value}
+                disabled={field.isDisabled} onchange={changeHandler} variant="label-hidden" type={field.dataType}
+                class={field.class}></lightning-input>
+            <p lwc:if={field.validityMessage} class="slds-text-color_error">
+                {field.validityMessage}
+            </p>
+        </template>
+        <template lwc:elseif={field.isLightningTextArea}>
+            <lightning-textarea label={field.label} value={field.value} onchange={changeHandler} class={field.class}
+                name={field.fieldApiName} style="margin-top: -14px;" disabled={field.isDisabled}
+                options={field.picklistOptions}></lightning-textarea>
+            <p lwc:if={field.validityMessage} class="slds-text-color_error">
+                {field.validityMessage}
+            </p>
+        </template>
+        <template lwc:elseif={field.isLightningComboboxTag}>
+            <lightning-combobox label={field.label} value={field.value} onchange={changeHandler} class={field.class}
+                name={field.fieldApiName} style="margin-top: -14px;" disabled={field.isDisabled}
+                options={field.picklistOptions}></lightning-combobox>
+            <p lwc:if={field.validityMessage} class="slds-text-color_error">
+                {field.validityMessage}
+            </p>
+        </template>
+        <template lwc:elseif={field.isLightningRadioGroupTag}>
+            <lightning-radio-group label={field.label} value={field.value} disabled={field.isDisabled}
+                name={field.fieldApiName} onchange={changeHandler} class={field.class}
+                options={field.picklistOptions}></lightning-radio-group>
+            <p lwc:if={field.validityMessage} class="slds-text-color_error">
+                {field.validityMessage}
+            </p>
+        </template>
+        <template lwc:elseif={field.isLightningAddressTag}>
+            <lightning-input-address street-label="Street" city-label="City" country-label="Country"
+                province-label="State" postal-code-label="Postal Code" onchange={changeHandler}
+                street={field.value.street} disabled={field.isDisabled} city={field.value.city}
+                name={field.fieldApiName} country={field.value.country} province={field.value.state}
+                postal-code={field.value.postalCode} class={field.class}>
+            </lightning-input-address>
+            <p lwc:if={field.validityMessage} class="slds-text-color_error">
+                {field.validityMessage}
+            </p>
+        </template>
+    </template>
+
+    <!-- Modal For Document Preview -->
+    <template if:true={showModal}>
+        <div class="">
+            <div class="slds-modal slds-fade-in-open">
+                <div class="slds-modal__container">
+                    <div class="slds-modal__header">
+                        <button
+                            class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse slds-text-align_center"
+                            title="Close" onclick={closeModal}>
+                            <lightning-icon icon-name="utility:close" alternative-text="close" variant="inverse"
+                                size="small">
+                            </lightning-icon>
+                            <span class="slds-assistive-text">Close</span>
+                        </button>
+                    </div>
+                    <div class="slds-modal__content slds-p-around_medium modal-container slds-text-align_center">
+                        <!-- Modal Content Comes Here -->
+                        <img src={modalUrl} />
+                    </div>
+                    <footer class="slds-modal__footer"></footer>
+                </div>
+            </div>
+            <div class="slds-backdrop slds-backdrop_open"></div>
+        </div>
+    </template>
+
+
+    <!-- Spinner Template -->
+    <template if:true={isSpinner}>
+        <div class="slds-is-relative">
+            <section class="slds-modal slds-fade-in-open">
+                <lightning-spinner alternative-text="loading..." variant="brand"></lightning-spinner>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open" style="width: 60%; height:50%; margin:auto"></div>
+        </div>
+    </template>
+
+</template>

@@ -1,0 +1,123 @@
+:host{
+    --table-header-background-color : #597e9e;
+    --table-header-font-color : white;
+    --slds-c-button-brand-color-background : #597e9e;
+    --slds-c-button-color-background : #597e9e;
+    --table-vertical-spacing : 21ch;
+}
+
+
+@media (max-width:500px){
+    .data-table {
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 650px) {
+
+    .table-data{
+        display: grid;
+        grid-template-columns: var(--table-vertical-spacing) auto;
+        gap:0.5rem;
+        padding: 0.5rem 1rem;   
+    }   
+
+    .table-data:first-child{
+        padding-top: 2rem;
+    }
+
+    .table-data:last-child{
+        padding-bottom: 2rem;
+    }
+    th{
+        display: none;
+    }
+    .table-data::before{
+        content: attr(data-cell) " : ";
+        font-weight: 700;
+    }
+   /*  .add-row-button{
+        position: absolute;
+        top: 25%;
+        right: 1%;
+    } */
+  
+}
+.table-column[data-is-sortable="true"] {
+    cursor: pointer;
+}
+.column-name-with-icon{
+    display: flex;
+    gap: 5px;
+    align-items: center;
+}
+.asc-desc-icons{
+        margin-bottom:1px;
+
+}
+.switch-icons{
+    cursor: pointer;
+}
+.table-row{
+    position: relative;
+    border: 1px solid black;
+}
+.value-container{
+    display: flex;
+}
+.data-table-section{
+    overflow: auto;
+    position: relative;
+}
+.child-tree-grid{
+    margin-left: 2rem;
+}
+.add-row-button{
+   /*  position: absolute;
+    top: 7%;
+    right: 0%; */
+    margin-bottom: -15px;
+    text-align: right;
+}
+.data-table {
+    border-collapse: collapse;
+    overflow: auto;
+    width: 100%;
+    border-spacing: 0;
+    background-color: white;
+}
+
+
+.data-table, th, .table-data {
+    /* border-collapse: collapse; */
+    padding: 5px;
+    text-align: left;
+}
+.table-header{
+    text-align: center;
+    margin: 1rem;
+    font-weight: 700;
+    font-size: 14px;
+    text-transform: uppercase;
+}
+.action-container{
+    display: flex;
+    gap: 10px;
+}
+.no-rows-found-message{
+    text-align: center;
+    padding: 0.5rem;
+    font-weight: 700;
+    font-size: 14px;
+    text-transform: uppercase;
+    color: rgb(206, 54, 54);
+}
+
+.table-column {
+    top: 0;
+    left: 0;
+    background-color: var(--table-header-background-color);
+    text-transform:uppercase;
+     position: relative;
+    color: var(--table-header-font-color);
+}

@@ -1,0 +1,108 @@
+<template>
+    <template lwc:if={tableData.isRecordsAvailable}>
+
+        <section class="data-table-section" style={tableData.tableCss}>
+            <table class="slds-text-body_small data-table">
+                <thead>
+                    <tr>
+                        <template lwc:if={tableData.columns.length} for:each={tableData.columns} for:item="column">
+                            <th key={column.fieldApiName} style={tableData.tableHeaderRowCss} class="table-column"
+                                data-field-name={column.fieldApiName} data-sort-direction={column.sortDirection}
+                                data-is-sortable={column.isSortable} onclick={handleSorting}>
+                                <div class="column-name-with-icon">
+                                    {column.fieldApiName}
+                                    <div class="asc-desc-icons">
+                                        <lightning-icon lwc:if={column.isAscending} variant={column.ascDescArrowVariant}
+                                            icon-name='utility:arrowup' alternative-text='arrowup' size='xx-small'
+                                            title='arrowup'></lightning-icon>
+                                        <lightning-icon lwc:if={column.isDescending}
+                                            variant={column.ascDescArrowVariant} icon-name='utility:arrowdown'
+                                            alternative-text='arrowdown' size='xx-small'
+                                            title='arrowdown'></lightning-icon>
+                                    </div>
+                                </div>
+                            </th>
+
+                        </template>
+                        <th lwc:if={tableData.isRecordActionAvailable} style={tableData.tableHeaderRowCss}
+                            class="table-column">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <template lwc:if={tableData.records}>
+                        <template for:each={tableData.records} for:item="record">
+
+                            <!-- Table Row -->
+                            <tr key={record.id} class="table-row" lwc:if={record.id}
+                                style={tableData.tableRecordRowCss}>
+                                <!-- Loop through Fields -->
+                                <template for:each={record.fields} for:item="field">
+                                    <td lwc:if={field.isActive} key={field.fieldApiName} data-cell={field.fieldLabel}
+                                        class="table-data">
+                                        <div class="value-container">
+                                            <!-- Expand/Collapse Icon -->
+                                            <div class="switch-icons" lwc:if={record.childRecords.isRecordsAvailable}>
+                                                <div lwc:if={field.isFirstColumn}>
+                                                    <lightning-icon icon-name="utility:switch" size="xx-small"
+                                                        data-record-id={record.id} onclick={handleExpand}
+                                                        class="chevron-icon"
+                                                        lwc:if={record.isExpanded}></lightning-icon>
+                                                    <lightning-icon icon-name="utility:chevronright" size="xx-small"
+                                                        data-record-id={record.id} onclick={handleExpand}
+                                                        class="chevron-icon" lwc:else></lightning-icon>
+                                                </div>
+                                            </div>
+                                            <a lwc:if={field.linkHref} target="_blank"
+                                                href={field.linkHref}><strong>{field.value}</strong></a>
+                                            <strong lwc:else>{field.value}</strong>
+                                        </div>
+                                    </td>
+                                </template>
+
+                                <!-- Action Buttons -->
+                                <td data-cell="Action" class="table-data">
+                                    <div class="action-container">
+                                        <lightning-button-icon lwc:if={tableData.isChildRecordCreatable} size="small"
+                                            icon-name="utility:add" title="Add Child Record" data-id={record.id}
+                                            variant="brand" alternative-text="Add Child Record" onclick={handleAddRow}>
+                                        </lightning-button-icon>
+                                        <lightning-button-icon lwc:if={tableData.isRecordsEditable} size="small"
+                                            icon-name="utility:edit" title="Edit" data-id={record.id} variant="brand"
+                                            alternative-text="Edit" onclick={handleEditRecord}>
+                                        </lightning-button-icon>
+                                        <lightning-button-icon lwc:if={tableData.isRecordsDeletable} size="small"
+                                            icon-name="utility:delete" title="Delete" variant="border-filled"
+                                            data-id={record.id} alternative-text="Delete" onclick={handleDeleteRecord}>
+                                        </lightning-button-icon>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <!-- Child Tree Grid Component -->
+                            <div lwc:if={record.id} key={record.id}>
+                                <div class="child-tree-grid" lwc:if={record.isExpanded}>
+                                    <c-tg_-tree-grid-table table-data={record.childRecords}
+                                        table-blue-print={tableBluePrint} parent-record-id={record.id}>
+                                    </c-tg_-tree-grid-table>
+                                </div>
+                            </div>
+
+                        </template>
+                    </template>
+
+                </tbody>
+            </table>
+        </section>
+    </template>
+
+    <template lwc:if={isSpinner}>
+        <div class="slds-is-relative">
+            <section class="slds-modal slds-fade-in-open">
+                <lightning-spinner alternative-text="loading..." variant="brand"></lightning-spinner>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open" style="width: 60%; height:50%; margin:auto"></div>
+        </div>
+    </template>
+
+
+</template>

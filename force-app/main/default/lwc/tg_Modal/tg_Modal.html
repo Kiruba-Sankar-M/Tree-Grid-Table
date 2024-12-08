@@ -1,0 +1,32 @@
+<template>
+    <lightning-modal-header label={headerLabel}></lightning-modal-header>
+    <lightning-modal-body>
+        <lightning-layout multiple-rows>
+            <template for:each={record.fields} for:item="field">
+                <lightning-layout-item lwc:if={field.isActive} size={field.mobileFormFactorWidth}
+                    small-device-size={field.tabFormFactorWidth} medium-device-size={field.tabFormFactorWidth}
+                    large-device-size={field.desktopFormFactorWidth} class="slds-p-horizontal_small slds-m-top_small "
+                    key={field.fieldApiName}>
+
+                    <!-- Fields Will Render Here -->
+                    <c-tg_-field field={field} onupdateformdata={handleValueChange}></c-tg_-field>
+                    <!-- --------------------- -->
+
+                </lightning-layout-item>
+            </template>
+        </lightning-layout>
+    </lightning-modal-body>
+    <lightning-modal-footer>
+        <lightning-button label="Cancel" onclick={handleCancel} style="margin-right: 1rem;"></lightning-button>
+        <lightning-button label={saveOrUpdateLabel} onclick={saveRecord} variant="brand"></lightning-button>
+    </lightning-modal-footer>
+
+    <template lwc:if={isSpinner}>
+        <div class="slds-is-relative">
+            <section class="slds-modal slds-fade-in-open">
+                <lightning-spinner alternative-text="loading..." variant="brand"></lightning-spinner>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open" style="width: 60%; height:50%; margin:auto"></div>
+        </div>
+    </template>
+</template>

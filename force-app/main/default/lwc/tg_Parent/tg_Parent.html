@@ -1,0 +1,25 @@
+<template>
+    <lightning-card title={tableHeader} onupdatetabledata={keepTableDataInSync}>
+        <div style="margin:1rem; text-align:right">
+            <lightning-button label={addParentRecordLabel} onclick={handleAddParent} variant="brand"></lightning-button>
+        </div>
+
+        <c-tg_-tree-grid-table table-data={tableData} lwc:if={tableData.isRecordsAvailable}
+            table-blue-print={tableBluePrint} onshowtoast={handleShowToastFromChildEvent}></c-tg_-tree-grid-table>
+
+        <div class="slds-text-align_center slds-p-around_medium slds-border slds-border_top slds-border_bottom"
+            lwc:else>
+            <p class="slds-text-heading_small slds-text-color_error">No {tableData.currentTableObjectLabel} Records
+                Found.
+            </p>
+        </div>
+    </lightning-card>
+    <template lwc:if={isSpinner}>
+        <div class="slds-is-relative">
+            <section class="slds-modal slds-fade-in-open">
+                <lightning-spinner alternative-text="loading..." variant="brand"></lightning-spinner>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open" style="width: 60%; height:50%; margin:auto"></div>
+        </div>
+    </template>
+</template>
