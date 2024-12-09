@@ -84,5 +84,15 @@ Define field-level configurations in the **Field Records** sheet.
 
 ---
 
+#### **Post Record Creation**  
+
+1. Drag and drop the **`tg_Parent`** component to the desired location in your Lightning Page.  
+2. Specify the **Table Header** and the **Tree Grid Configuration Record Name**.  
+3. Your custom tree grid table is ready to use!  
+4. Example:  
+   ![Tree Grid Example](https://github.com/user-attachments/assets/10a8d32d-2ca2-4396-9871-4e1febe4ca29)  
+5. **Key Advantage**: This component allows you to create an unlimited number of tree grid tables. Simply configure records in the `Tree_Grid_Configuration__c` object and provide the corresponding record name when adding the component to your page.
+
+
 #### **Conclusion**  
 With this component, creating a fully functional tree grid is seamless and efficient. By configuring the `Tree_Grid_Configuration__c` object, you gain full control over the structure, style, and behavior of your table. It’s an ideal solution for scenarios requiring dynamic and customized grid structures.
