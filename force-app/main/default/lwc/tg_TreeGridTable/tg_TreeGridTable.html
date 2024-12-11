@@ -42,7 +42,7 @@
                                         <div class="value-container">
                                             <!-- Expand/Collapse Icon -->
                                             <div class="switch-icons" lwc:if={record.childRecords.isRecordsAvailable}>
-                                                <div lwc:if={field.isFirstColumn}>
+                                                <div lwc:if={field.isFirstColumn} style="margin-right: 3px;">
                                                     <lightning-icon icon-name="utility:switch" size="xx-small"
                                                         data-record-id={record.id} onclick={handleExpand}
                                                         class="chevron-icon"

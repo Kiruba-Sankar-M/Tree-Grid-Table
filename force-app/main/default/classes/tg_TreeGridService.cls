@@ -192,13 +192,14 @@
             field.isLightningRadioGroupTag = fieldConfig.Is_Lightning_Radio_Button__c;
             field.isLightningAddressTag = fieldConfig.Is_Lightning_Address__c;
             field.picklistOptions = isPicklist(fieldConfig) ? getPicklistOptions(tableConfig.Current_Table_Object_Api_Name__c, fieldConfig.Field_API_Name__c) : new List<Map<String, Object>>();
-            field.linkHref = generateLinkHref(fieldConfig.Link_Href__c, recordData.id);
+            field.linkHref = generateLinkHref(fieldConfig.Link_Href__c ?? '', record?.Id );
             recordData.fields.add(field);
         }
     }
 
     private static String generateLinkHref(String linkHref, String recordId) {
-        if (String.isEmpty(linkHref)) return null;
+        if (String.isEmpty(linkHref) || linkHref == '') return null;
+        if(recordId == null) return linkHref;
         return linkHref.toLowerCase().contains('recordid') ? '/' + recordId : linkHref;
     }
 

@@ -86,7 +86,6 @@ export default class Tg_Parent extends LightningElement {
         getBluePrintOfTable({ tableApiName: this.tableName })
             .then(result => {
                 this.tableBluePrint = result;
-                console.log('tableBluePrint: ' + JSON.stringify(this.tableBluePrint));
             })
             .catch(error => {
                 this.handleError( error, `Error fetching table blueprint`);

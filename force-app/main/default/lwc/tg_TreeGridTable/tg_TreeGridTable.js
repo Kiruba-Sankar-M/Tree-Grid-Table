@@ -204,11 +204,15 @@ export default class Tg_TreeGridTable extends LightningElement {
             if (record) {
                 let childRecord = {};        
                 childRecord.id = id;
-                let field = fields.find(field => field.linkHref != '');
-                if (field) {
-                    field.linkHref = `/${id}`
+                let clonedFields = [...fields];
+                console.log('field  ' + JSON.stringify(clonedFields));
+                let fieldIndex = clonedFields.findIndex(field => field.linkHref && (field?.linkHref.includes('recordId') || field?.linkHref.includes('recordid') ));
+                console.log('index ' + fieldIndex);
+                if (fieldIndex != -1) {
+                    console.log('fieldIndex ' + fieldIndex);
+                    clonedFields[fieldIndex].linkHref = `/${id}`
                 }
-                childRecord.fields = fields;
+                childRecord.fields = clonedFields;
                 childRecord.isExpanded = true;
                 childRecord.childRecords = {};
                 if (this.tableBluePrint.hasOwnProperty(this.tableData.childObjectApiName) && !record.childRecords?.records?.length) {

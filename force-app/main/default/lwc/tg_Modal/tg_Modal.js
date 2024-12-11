@@ -12,7 +12,6 @@ export default class Tg_Modal extends LightningModal {
     @api parentLookupFieldApiName;
     isSpinner;
 
-
     handleValueChange(event) {
 
         let { fieldApiName, fieldValue, checked, isCheckbox, isInputValid, validityMessage, sldsClass } = event.detail;
