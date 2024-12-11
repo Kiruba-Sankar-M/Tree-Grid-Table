@@ -122,6 +122,7 @@ export default class Tg_TreeGridTable extends LightningElement {
             }
             this.tableData = clonedData;
         }
+        this.dispatchUpdateToParent(recordId, this.tableData);
     }
 
     getOrCreateFields(recordId, isCurrentTable) {

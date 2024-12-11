@@ -1,6 +1,6 @@
 import { api, wire } from 'lwc';
 import LightningModal from 'lightning/modal';
-import upsertRecords from '@salesforce/apex/poc_Form_Controller.upsertRecords';
+import upsertRecords from '@salesforce/apex/tg_TreeGridService.upsertRecords';
 import { setCustomValidity } from 'c/validityCheck';  // Import the custom validity function
 
 export default class Tg_Modal extends LightningModal {
