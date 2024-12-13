@@ -1,5 +1,7 @@
 ### **Tree Grid Configuration Documentation**
 
+UNMANAGED PACKAGE LINK: https://login.salesforce.com/packaging/installPackage.apexp?p0=04tJ4000000gOBF
+
 #### **Overview**  
 The Tree Grid Configuration Lightning Web Component (LWC) enables the creation of dynamic and customizable tree grid tables using the configuration provided in the `Tree_Grid_Configuration__c` object. Simply configure the required settings in an Excel sheet, import them into Salesforce, and let the component handle the rest. With minimal effort, this component delivers a robust and flexible tree grid structure tailored to your needs.
 
@@ -26,7 +28,8 @@ Use this component for dynamic and efficient tree grid table solutions. It is es
 ### **Configuration Instructions**  
 
 #### **Getting Started**  
-1. **Download the Excel Template**: Use the [Tree Grid Configuration Template](https://github.com/user-attachments/files/18055920/Tree.Grid.Configuration.xlsx) as a blueprint for your configurations.  
+1. **Download the Excel Template**: Use the [Tree Grid Config README.xlsx](https://github.com/user-attachments/files/18120043/Tree.Grid.Config.README.xlsx)
+ as a blueprint for your configurations.  
 2. **Explore the Template**: The workbook contains three sheets:
    - **Object Configuration**: Explains the schema of `Tree_Grid_Configuration__c`.  
    - **Data Table Records**: Details for table configurations.  
